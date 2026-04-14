@@ -1,34 +1,35 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class TrainConsistManagementApp {
-    static class GoodsBogie {
+    static class Bogie {
         String type;
-        String cargo;
-        GoodsBogie(String type, String cargo) {
+        int capacity;
+        Bogie(String type, int capacity) {
             this.type = type;
-            this.cargo = cargo;
+            this.capacity = capacity;
         }
     }
     public static void main(String[] args) {
-        System.out.println("==============================================");
-        System.out.println("UC12: Safety Compliance Check for Goods Bogies");
-        System.out.println("==============================================");
-        List<GoodsBogie> goodsBogies = new ArrayList<>();
-        goodsBogies.add(new GoodsBogie("Cylindrical","Petroleum"));
-        goodsBogies.add(new GoodsBogie("Open","Coal"));
-        goodsBogies.add(new GoodsBogie("Box","Grain"));
-        goodsBogies.add(new GoodsBogie("Cylindrical","Coal"));
-        System.out.println("Goods Bogies in Train: ");
-        for(GoodsBogie g : goodsBogies)
-            System.out.println(g.type + " -> " + g.cargo);
-        boolean isGoodsBogieValid = goodsBogies.stream()
-                .allMatch(g -> !g.type.equals("Cylindrical") || g.cargo.equals("Petroleum"));
-        System.out.println("Safety Compliance Status: " + isGoodsBogieValid);
-        if(isGoodsBogieValid)
-            System.out.println("Train formation is SAFE");
-        else
-            System.out.println("Train formation is NOT SAFE");
-        System.out.println("UC10 validation completed....");
+        System.out.println("=============================================");
+        System.out.println("UC13: Performance Comparison(Loops vs Streams");
+        System.out.println("=============================================");
+        List<Bogie> bogies = new ArrayList<>();
+        bogies.add(new Bogie("Sleeper",72));
+        bogies.add(new Bogie("AC Chair",56));
+        bogies.add(new Bogie("First Class",24));
+        bogies.add(new Bogie("Sleeper",70));
+        long startLoop = System.nanoTime();
+        int totalLoop = 0;
+        for(Bogie b : bogies)
+            totalLoop += b.capacity;
+        long endLoop = System.nanoTime();
+        long startStream = System.nanoTime();
+        int totalStream = bogies.stream().mapToInt(b -> b.capacity).sum();
+        long endStream = System.nanoTime();
+        System.out.println("Loop Execution Time(ns): " + (endLoop - startLoop));
+        System.out.println("Stream Execution Time(ns): " + (endStream - startStream));
+        System.out.println("UC13 performance benchmarking completed....");
     }
 }
