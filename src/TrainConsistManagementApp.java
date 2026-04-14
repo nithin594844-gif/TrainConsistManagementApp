@@ -17,6 +17,6 @@ public class TrainConsistManagementApp {
             System.out.println("Bogie " + searchId + " found in train consist");
         else
             System.out.println("Bogie " + searchId + " not found in train consist");
-        System.out.println("\nUC17 sorting completed....");
+        System.out.println("\nUC18 search completed....");
     }
 }
