@@ -22,6 +22,6 @@ public class TrainConsistManagementApp {
         boolean isCargoValid = cargoMatcher.matches();
         System.out.println("Train ID Valid: " + isTrainValid);
         System.out.println("Cargo Code Valid: " + isCargoValid);
-        System.out.println("UC10 validation completed....");
+        System.out.println("UC11 validation completed....");
     }
 }
