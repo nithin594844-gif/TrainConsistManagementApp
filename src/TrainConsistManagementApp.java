@@ -1,34 +1,28 @@
-import java.util.Arrays;
-
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("=========================================");
-        System.out.println("UC19: Binary Search for Bogie ID");
+        System.out.println("UC20: Exception Handling During Search");
         System.out.println("=========================================");
-        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
-        Arrays.sort(bogieIds);
-        String searchId = "BG309";
-        System.out.println("Sorted Bogie IDs: ");
-        for(String id : bogieIds)
-            System.out.println(id + " ");
-        int low = 0,high = bogieIds.length - 1;
-        boolean found = false;
-        while(low <= high){
-            int mid = (low + high) / 2;
-            int result = bogieIds[mid].compareTo(searchId);
-            if(result == 0) {
-                found = true;
-                break;
+        String[] bogieIds = {};
+        String searchId = "BG101";
+        try {
+            if(bogieIds.length == 0) {
+                throw new IllegalStateException("No bogies in train. Cannot perform search.");
             }
-            else if(result < 0)
-                low = mid + 1;
+            boolean found = false;
+            for(String id : bogieIds) {
+                if (id.equals(searchId)) {
+                    found = true;
+                    break;
+                }
+            }
+            if(found)
+                System.out.println("Bogie " + searchId + " found using Binary Search");
             else
-                high = mid - 1;
+                System.out.println("Bogie " + searchId + " not found!");
         }
-        if(found)
-            System.out.println("Bogie " + searchId + " found using Binary Search");
-        else
-            System.out.println("Bogie " + searchId + " not found!");
-        System.out.println("\nUC19 search completed....");
+        catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
