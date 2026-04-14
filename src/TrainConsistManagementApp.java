@@ -1,18 +1,22 @@
-import java.util.Arrays;
-
 public class TrainConsistManagementApp {
     public static void main(String[] args) {
         System.out.println("=========================================");
-        System.out.println("UC17: Sort Bogie Names using Array.sort()");
+        System.out.println("UC18: Linear Search for Bogie ID");
         System.out.println("=========================================");
-        String[] arrays = {"Sleeper", "AC_Chair", "First_Class", "General", "Luxury"};
-        System.out.println("Original Bogie Names: ");
-        for(String arr : arrays)
-            System.out.print(arr + " ");
-        Arrays.sort(arrays);
-        System.out.println("\n\nSorted Bogies Names(Alphabetical): ");
-        for(String arr : arrays)
-            System.out.print(arr + " ");
+        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        String searchId = "BG309";
+        System.out.println("Available Bogie IDs: ");
+        for(String id : bogieIds)
+            System.out.println(id + " ");
+        boolean found = false;
+        for(String id : bogieIds){
+            if(id == searchId)
+                found = true;
+        }
+        if(found)
+            System.out.println("Bogie " + searchId + " found in train consist");
+        else
+            System.out.println("Bogie " + searchId + " not found in train consist");
         System.out.println("\nUC17 sorting completed....");
     }
 }
