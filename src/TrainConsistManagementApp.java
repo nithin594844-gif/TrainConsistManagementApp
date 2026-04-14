@@ -1,35 +1,37 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class TrainConsistManagementApp {
-    static class Bogie {
+    static class InvalidCapacityException extends Exception {
+        public InvalidCapacityException(String message) {
+            super(message);
+        }
+    }
+    static class PassangerBogie {
         String type;
         int capacity;
-        Bogie(String type, int capacity) {
+        PassangerBogie(String type, int capacity) throws InvalidCapacityException {
             this.type = type;
             this.capacity = capacity;
+            if(capacity <= 0)
+                throw new InvalidCapacityException("Error: Capacity must be greater than zero");
         }
     }
     public static void main(String[] args) {
-        System.out.println("=============================================");
-        System.out.println("UC13: Performance Comparison(Loops vs Streams");
-        System.out.println("=============================================");
-        List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie("Sleeper",72));
-        bogies.add(new Bogie("AC Chair",56));
-        bogies.add(new Bogie("First Class",24));
-        bogies.add(new Bogie("Sleeper",70));
-        long startLoop = System.nanoTime();
-        int totalLoop = 0;
-        for(Bogie b : bogies)
-            totalLoop += b.capacity;
-        long endLoop = System.nanoTime();
-        long startStream = System.nanoTime();
-        int totalStream = bogies.stream().mapToInt(b -> b.capacity).sum();
-        long endStream = System.nanoTime();
-        System.out.println("Loop Execution Time(ns): " + (endLoop - startLoop));
-        System.out.println("Stream Execution Time(ns): " + (endStream - startStream));
-        System.out.println("UC13 performance benchmarking completed....");
+        System.out.println("===================================");
+        System.out.println("UC14: Handle Invalid Bogie Capacity");
+        System.out.println("====================================");
+        List<PassangerBogie> bogies = new ArrayList<>();
+        try {
+            bogies.add(new PassangerBogie("AC Chair",-24));
+            bogies.add(new PassangerBogie("Sleeper",72));
+        }
+        catch(InvalidCapacityException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Created Bogies: ");
+        for(PassangerBogie b : bogies)
+            System.out.println(b.type + " -> " + b.capacity);
+        System.out.println("UC14 exception handling completed....");
     }
 }
