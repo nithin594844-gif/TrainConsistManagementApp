@@ -29,6 +29,6 @@ public class TrainConsistManagementApp {
             System.out.println("Train formation is SAFE");
         else
             System.out.println("Train formation is NOT SAFE");
-        System.out.println("UC10 validation completed....");
+        System.out.println("UC12 safety validation completed....");
     }
 }
